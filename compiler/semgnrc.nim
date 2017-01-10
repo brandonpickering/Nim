@@ -106,8 +106,9 @@ proc lookup(c: PContext, n: PNode, flags: TSemGenericFlags,
   let ident = considerQuotedIdent(n)
   var s = searchInScopes(c, ident).skipAlias(n)
   if s == nil:
-    if ident.id notin ctx.toMixin and withinMixin notin flags:
-      errorUndeclaredIdentifier(c, n.info, ident.s)
+    #if ident.id notin ctx.toMixin and withinMixin notin flags:
+    #  errorUndeclaredIdentifier(c, n.info, ident.s)
+    discard
   else:
     if withinBind in flags:
       result = symChoice(c, n, s, scClosed)
